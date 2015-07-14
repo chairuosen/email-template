@@ -10,13 +10,14 @@
 <script src="./zepto.min.js"></script>
 <script src="./main.js"></script>
 <script>
+    var TEXT_COLOR = "#333333";
     var JSON_MODULE = {
         title:{
             type:'title',
             size:20,
             center:false,
             value:'新增标题',
-            color:''
+            color:TEXT_COLOR
 
         },
         image:{
@@ -29,10 +30,10 @@
             type:"passage",
             value:'新增段落',
             size:14,
-            color:'',
+            color:TEXT_COLOR,
             linktext:'',
             linkhref:'',
-            linkcolor:''
+            linkcolor:TEXT_COLOR
         },
         block:{
             type:"block",
@@ -43,7 +44,7 @@
             text:'按钮',
             link:'',
             size:16,
-            background:'#777777',
+            background:TEXT_COLOR,
             color:'#ffffff',
             padding:12
         }
@@ -194,7 +195,7 @@
                         </ul>
                     </div>
                     <ul class="common-list">
-                        <li v-repeat="item:list">
+                        <li v-repeat="item:list" style="padding-left:10px;">
                             <partial name="{{'panel-'+item.type}}"></partial>
                             <button v-on="click:del($index)">删除</button>
                         </li>
