@@ -83,6 +83,9 @@ $(function(){
             replace:function(all,find,to){
                 return all.replace(find,to);
             },
+            clearAll:function(){
+                vm.$data.list = [];
+            },
             getStyle:function(o){
                 if(!o)return "";
                 var _ = "";
