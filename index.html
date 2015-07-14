@@ -166,7 +166,7 @@
             <div class="clearfix">
 
                 <div id="panel" class="fl left-block">
-                    <div id="panel_add" class="panel-add">
+                    <div id="panel_add" class="panel-add margin">
                         增加一个：
                         <ul class="tabs small">
                             <li v-on="click:add('title')">标题</li>
@@ -177,7 +177,15 @@
                         </ul>
                         
                     </div>
-                    <div id="panel_save" class="panel-save">
+                    <div class="margin">
+                        应用模板：
+                        <ul class="tabs small">
+                            <li v-on="click:chooseTemplate(1)">模板1</li>
+                            <li v-on="click:chooseTemplate(2)">模板2</li>
+                            <li v-on="click:chooseTemplate(3)">模板3</li>
+                        </ul>
+                    </div>
+                    <div id="panel_save" class="panel-save margin">
                         保存到：<select v-model="save_position">
                             <option v-repeat="o:[1,2,3,4,5]" value="{{o}}">{{o}}</option>
                         </select>
@@ -186,15 +194,10 @@
                             <option v-repeat="o:[1,2,3,4,5]" value="{{o}}">{{o}}</option>
                         </select>
                         <button v-on="click:restore(restore_position);">确定</button>
-                        <div style="height:1px;"></div>
                         <br>
-                        <ul class="tabs small">
-                            <li v-on="click:chooseTemplate(1)">模板1</li>
-                            <li v-on="click:chooseTemplate(2)">模板2</li>
-                            <li v-on="click:chooseTemplate(3)">模板3</li>
-                        </ul>
-                        <button v-on="click:clearAll()">全清</button>
+                        <button v-on="click:clearAll()">当前全清</button>
                     </div>
+
                     <ul class="common-list">
                         <li v-repeat="item:list" style="padding-left:10px;">
                             <partial name="{{'panel-'+item.type}}"></partial>
