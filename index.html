@@ -201,7 +201,10 @@
                     <ul class="common-list">
                         <li v-repeat="item:list" style="padding-left:10px;">
                             <partial name="{{'panel-'+item.type}}"></partial>
+                            <div class="fr">
                             <button v-on="click:del($index)">删除</button>
+                                
+                            </div>
                         </li>
                     </ul>
                 </div>
