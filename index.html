@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>宇宙超级无敌牛逼邮件模板</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="./vue.min.js"></script>
+<script src="./zepto.min.js"></script>
+<script src="./main.js"></script>
+<script>
+    var JSON_MODULE = {
+        title:{
+            type:'title',
+            size:20,
+            center:false,
+            value:'新增标题',
+            color:''
+
+        },
+        image:{
+            type:'image',
+            link:'',
+            center:false,
+            src:'http://ww4.sinaimg.cn/large/3fab340fjw1eu2d76m730j202p02oq2p.jpg'
+        },
+        passage:{
+            type:"passage",
+            value:'新增段落',
+            size:14,
+            color:'',
+            linktext:'',
+            linkhref:'',
+            linkcolor:''
+        },
+        block:{
+            type:"block",
+            size:10
+        },
+        button:{
+            type:'button',
+            text:'按钮',
+            link:'',
+            size:16,
+            background:'#777777',
+            color:'#ffffff',
+            padding:12
+        }
+
+    }
+</script>
+<link href="./style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div style="display:none;" id="panel_module">
+        <div class="module" name="title">
+            标题：
+            <input type="text" v-model="item.value">
+            <select v-model="item.size" name="" id="">
+                <option v-repeat="s:fontsize" value="{{s}}">{{s}}px</option>
+            </select>
+            <input type="checkbox" v-model="item.center" id="radio_{{$index}}">
+            <label for="radio_{{$index}}">居中</label>
+            <input type="color" v-model="item.color">
+        </div>
+        <div class="module" name="image">
+            图片：
+            src: <input type="text" v-model="item.src">
+            link: <input type="text" v-model="item.link">
+            <input type="checkbox" v-model="item.center" id="radio_{{$index}}">
+            <label for="radio_{{$index}}">居中</label>
+        </div>
+        <div class="module" name="passage">
+            段落：
+            <textarea name="" id="" cols="30" rows="10" style="  width: 100%;" v-model="item.value"></textarea>
+            字号：<select v-model="item.size" name="" id="">
+                <option v-repeat="s:fontsize" value="{{s}}">{{s}}px</option>
+            </select>
+            正文颜色：
+            <input type="color" v-model="item.color">
+            <br> 
+            链接文字：
+            <input type="text" v-model="item.linktext">
+            链接地址：
+            <input type="text" v-model="item.linkhref">
+            <br> 
+            链接颜色：
+            <input type="color" v-model="item.linkcolor">
+            链接请用{a}标记
+        </div>
+        <div class="module" name="block">
+            空行：
+            <select v-model="item.size" name="" id="">
+                <option v-repeat="s:[5,10,15,20,30,100]" value="{{s}}">{{s}}px</option>
+            </select>
+        </div>
+        <div class="module" name="button">
+            文字：<input type="text" v-model="item.text">
+            链接：<input type="text" v-model="item.link">
+            字号：<select v-model="item.size">
+                <option v-repeat="s:fontsize" value="{{s}}">{{s}}px</option>
+            </select>
+            背景：<input type="color" v-model="item.background">
+            颜色：<input type="color" v-model="item.color">
+            边距：<select v-model="item.padding" >
+                <option v-repeat="s:[12,14,16,18,20,24,28]" value="{{s}}">{{s}}px</option>
+            </select>
+        </div>
+    </div>
+
+    <div style="display:none;" id="display_module">
+        <div class="module" name="title">
+            <div v-attr="style:getStyle({
+                'font-size:{{v}}px;':item.size,
+                'text-align:center;':item.center,
+                'line-height:1.6em;':true,
+                'color:{{v}};':item.color
+            })">{{item.value}}</div>
+        </div>
+        <div class="module" name="image">
+            <div v-attr="style:getStyle({
+                'text-align:center;':item.center
+            })">
+                <img v-if="!item.link" v-attr="src:item.src" style="max-width:100%;vertical-align: top;" alt="">
+                <a href="{{item.link}}" v-if="item.link" target="_blank">
+                    <img v-attr="src:item.src" style="vertical-align: top;max-width:100%;" alt="">
+                </a>
+            </div>
+            
+        </div>
+        <div class="module" name="passage">
+            <p v-attr="style:getStyle({
+                'text-indent:2em;':true,
+                'font-size:{{v}}px;':item.size,
+                'line-height:1.6em;':true,
+                'color:{{v}};':item.color
+            })" v-html="passage(item)"></p>
+        </div>
+        <div class="module" name="block">
+            <div v-attr="style:getStyle({
+                'height:{{v}}px;':item.size
+            })"></div>
+        </div>
+        <div class="module" name="button">
+            <div style="height:20px;"></div>
+            <div style="text-align:center;">
+                <a href="{{item.link}}" target="_blank" v-attr="style:getStyle({
+                'background:{{v}};':item.background,
+                'font-size:{{v}}px;':item.size,
+                'line-height:{{v}}px;':item.height,
+                'text-decoration: none;':true,
+                'padding:{{v}}px;':item.padding,
+                'color:{{v}};':item.color
+            })">{{item.text}}</a>
+            </div>
+            <div style="height:20px;"></div>
+        </div>
+    </div>
+
+
+    <div id="vue">
+        <div class="container">
+            <div class="clearfix">
+
+                <div id="panel" class="fl left-block">
+                    <div id="panel_add" class="panel-add">
+                        增加一个：
+                        <ul class="tabs small">
+                            <li v-on="click:add('title')">标题</li>
+                            <li v-on="click:add('image')">图片</li>
+                            <li v-on="click:add('passage')">段落</li>
+                            <li v-on="click:add('block')">空行</li>
+                            <li v-on="click:add('button')">按钮</li>
+                        </ul>
+                        
+                    </div>
+                    <div id="panel_save" class="panel-save">
+                        保存到：<select v-model="save_position">
+                            <option v-repeat="o:[1,2,3,4,5]" value="{{o}}">{{o}}</option>
+                        </select>
+                        <button v-on="click:save(save_position);">确定</button> 
+                        读取：<select v-model="restore_position">
+                            <option v-repeat="o:[1,2,3,4,5]" value="{{o}}">{{o}}</option>
+                        </select>
+                        <button v-on="click:restore(restore_position);">确定</button>
+                        <div style="height:1px;"></div>
+                        <br>
+                        <ul class="tabs small">
+                            <li v-on="click:chooseTemplate(1)">模板1</li>
+                            <li v-on="click:chooseTemplate(2)">模板2</li>
+                            <li v-on="click:chooseTemplate(3)">模板3</li>
+                        </ul>
+                    </div>
+                    <ul class="common-list">
+                        <li v-repeat="item:list">
+                            <partial name="{{'panel-'+item.type}}"></partial>
+                            <button v-on="click:del($index)">删除</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fr right-block">
+                    <ul class="tabs">
+                        <li v-repeat="3" v-class="active:tab==$index" v-on="click:tab=$index">{{["预览","数据","代码"][$index]}}</li>
+                    </ul>
+                    <div style="border:2px dashed #999;">
+                        <div id="display" v-show="tab==0" v-html="html"></div>
+
+                        <div id="json"  v-show="tab==1">
+                            JSON:
+                            <pre v-html="json(list)"></pre>
+                        </div>
+                        <div id="html"  v-show="tab==2">
+                            <div style="background:#f9f9f9;padding:10px;">
+                                <pre v-text="html"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="_display" style="display:none;">
+                    <div v-repeat="item:list">
+                        <partial name="{{'display-'+item.type}}"></partial>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="template" style="display:none;">
+        <div name="3">
+            <table border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="margin:0 auto;">
+                <tbody>
+                    <tr>
+                        <td>
+                            {{main}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div name="2">
+            <table style="background:#e6e6e6;color:#1d1d1e;" border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#e6e6e6;">
+                <tbody>
+                <tr>
+                    <td>
+                        <table style="margin:0 auto;width:640px;height:75px;background:#0066cc;color:#fff;" align="center">
+                            <tbody>
+                            <tr>
+                                <td width="20">
+                                </td>
+                                <td>
+                                    <img src="http://img.zhaopin.weibo.com/web/161/img/logo_n.png" width="80" height="43" style="margin-left:10px;" alt=""/>
+                                </td>
+                                <td>
+                                    <div style="font-family:'微软雅黑';font-size:16px;text-align:right;color:#fff;line-height:1.4em;">
+                                        微博上的精准招聘专家<br/>
+                                        <a style="font-size:12px;color:#fff;text-decoration:none;" href="http://zhaopin.weibo.com?src=edm_mail">zhaopin.weibo.com</a>
+                                    </div>
+                                </td>
+                                <td width="30">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table style="margin:0 auto;width:640px;background:#fff;color:#333;" border="0" cellpadding="0" cellspacing="0" align="center">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <table style="width:563px;margin:0 auto;" align="center">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div style="height:20px;"></div>
+                                                {{main}}
+                                                <div style="height:20px;"></div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <div style="border-top:1px solid #ddd;">
+                                        <table style="width:563px;margin:0 auto;" align="center">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div style="line-height:40px;color:#aaa;font-size:12px;">
+                                                        注：此邮件为系统邮件，请勿直接回复。
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        &nbsp;
+                        <table style="height:10px"></table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div name="1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="">
+                <tbody>
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" bgcolor="#eaeff4" width="700" align="center" style="margin:0 auto;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table border="0" cellpadding="0" cellspacing="0" width="680" align="center"   style="margin:0 auto;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td rowspan="3" width="20">
+                                                        </td>
+                                                        <td>
+                                                            <div style="height:10px;"></div>
+                                                        </td>
+                                                        <td rowspan="3">
+                                                            <div style="color:#333;">
+                                                                <span style="font-size:16px;">
+                                                                    微招聘PRO - 只做高薪
+                                                                </span>
+                                                                <br>
+                                                                <a style="font-size:12px;text-decoration:none;color:#333;" href="http://app.weizhaopin.com">
+                                                                    http://app.weizhaopin.com
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="190">
+                                                            <div style="width:172px;border-right:1px solid #333;">
+                                                                <img src="http://ww2.sinaimg.cn/large/3fab340fjw1etnbbjv9owj2048013jr8.jpg" width="152" height="39" alt="">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div style="height:10px;"></div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            
+                                        <table border="1" bordercolor="#bbbbbb" bgcolor="#ffffff" rules="none" cellpadding="0" cellspacing="0" width="680" align="center"  style="margin:0 auto;">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        
+                                                        <table  border="0" cellpadding="0" cellspacing="0" width="640" align="center"  style="margin:0 auto;" bgcolor="#ffffff" >
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div style="height:20px;"></div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        {{main}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div style="height:20px;"></div>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                                <tr>
+                                                                    <td colspan="2">
+                                                                        <div style="width:100%;border-bottom:1px dotted #999;"></div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div style="height:15px;"></div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2">
+                                                                        <div style="font-size:11px;color:#333;">
+                                                                            本邮件由招聘方操作，微招聘PRO代发，<span style="color:#f66;">请勿直接回复</span>
+                                                                            <br/>
+                                                                            如果您不想收到此类邮件，可以点击 <a href="" style="color:#06f;">退订邮件</a>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div style="height:15px;"></div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="height:10px;"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
