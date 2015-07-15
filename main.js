@@ -113,7 +113,7 @@ $(function(){
                     return "<a href='"+href+"' target='_blank' style='color:"+color+"'  >"+(text||href)+"</a>";
                 }
                 var str = getLink(item.linkhref,item.linktext,item.linkcolor);
-                return item.value.replace(/{a}/g,str);
+                return item.value.replace(/{a}/g,str).replace(/\n/g,"<br/>");
             },
             chooseTemplate:function(i){
                 templateId = i;
