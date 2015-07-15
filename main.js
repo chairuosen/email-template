@@ -42,7 +42,7 @@ $(function(){
         }
         timeout = setTimeout(function(){
             db.set(vm.$data.list,1);
-            vm.$data.html = buildTemplate(templateId,getMainHtml());
+            vm.$data.html = buildTemplate(vm.$data.templateId,getMainHtml());
         },10);
     }
     $('#panel_module>.module').each(function(){
@@ -53,7 +53,6 @@ $(function(){
     });
 
     var templateArr = getTemplate();
-    var templateId = 1;
     var timeout;
     var vm = new Vue({
         el:'#vue',
@@ -61,6 +60,7 @@ $(function(){
             list:db.get(1)||[],
             html:"",
             tab:0,
+            templateId:1,
             fontsize:[12,14,16,18,20,22,24,26,30,34,38,42]
         },
         methods:{
@@ -122,7 +122,7 @@ $(function(){
                 return item.value.replace(/{a}/g,str).replace(/\n/g,"<br/>");
             },
             chooseTemplate:function(i){
-                templateId = i;
+                vm.$data.templateId = i;
                 onListChange();
             }
         }

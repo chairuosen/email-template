@@ -189,9 +189,7 @@
                     <div class="margin">
                         应用模板：
                         <ul class="tabs small">
-                            <li v-on="click:chooseTemplate(1)">模板1</li>
-                            <li v-on="click:chooseTemplate(2)">模板2</li>
-                            <li v-on="click:chooseTemplate(3)">模板3</li>
+                            <li v-repeat="3" v-on="click:chooseTemplate($index+1)" v-class="active:templateId==($index+1)">模板{{$index+1}}</li>
                         </ul>
                     </div>
                     <div id="panel_save" class="panel-save margin">
