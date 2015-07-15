@@ -7,6 +7,7 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <script src="./vue.min.js"></script>
+<script src="./dnd.vue.js"></script>
 <script src="./zepto.min.js"></script>
 <script src="./main.js"></script>
 <script>
@@ -207,7 +208,11 @@
                     </div>
 
                     <ul class="common-list">
-                        <li v-repeat="item:list" style="padding-left:10px;">
+                        <li 
+                        v-repeat="item:list"
+                        v-draggable="x: {index: $index, dragged: 'dragged'}" 
+                        v-dropzone="x: sort(list, $index, $droptag, $dropdata)"
+                        style="padding-left:10px;" >
                             <partial name="{{'panel-'+item.type}}"></partial>
                             <div class="fr">
                             <button v-on="click:del($index)">删除</button>
@@ -412,9 +417,7 @@
                                                                 <tr>
                                                                     <td colspan="2">
                                                                         <div style="font-size:11px;color:#333;">
-                                                                            本邮件由招聘方操作，微招聘PRO代发，<span style="color:#f66;">请勿直接回复</span>
-                                                                            <br/>
-                                                                            如果您不想收到此类邮件，可以点击 <a href="" style="color:#06f;">退订邮件</a>
+                                                                            本邮件由微招聘PRO系统自动发送，<span style="color:#f66;">请勿直接回复</span>
                                                                         </div>
                                                                     </td>
                                                                 </tr>

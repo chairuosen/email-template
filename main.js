@@ -1,4 +1,5 @@
 $(function(){
+    Vue.use(Vue_dnd);
     var db = {
         set:function(a,n){
             var data = this.get()||{};
@@ -63,6 +64,11 @@ $(function(){
             fontsize:[12,14,16,18,20,22,24,26,30,34,38,42]
         },
         methods:{
+            sort: function(list, id, tag, data) {
+                var tmp = list[data.index];
+                list.splice(data.index, 1);
+                list.splice(id, 0, tmp);
+            },
             json:function(o){
                 return JSON.stringify(o,null, 2);
             },
