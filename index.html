@@ -55,6 +55,7 @@
 </head>
 <body>
 
+    <!-- panel start -->
     <div style="display:none;" id="panel_module">
         <div class="module" name="title">
             标题：
@@ -100,17 +101,20 @@
         <div class="module" name="button">
             文字：<input type="text" v-model="item.text">
             链接：<input type="text" v-model="item.link">
+            <br>
             字号：<select v-model="item.size">
                 <option v-repeat="s:fontsize" value="{{s}}">{{s}}px</option>
             </select>
-            背景：<input type="color" v-model="item.background">
             颜色：<input type="color" v-model="item.color">
+            背景：<input type="color" v-model="item.background">
             边距：<select v-model="item.padding" >
                 <option v-repeat="s:[12,14,16,18,20,24,28]" value="{{s}}">{{s}}px</option>
             </select>
         </div>
     </div>
-
+    <!-- panel end -->
+    
+    <!-- preview start -->
     <div style="display:none;" id="display_module">
         <div class="module" name="title">
             <div v-attr="style:getStyle({
@@ -159,7 +163,7 @@
             <div style="height:20px;"></div>
         </div>
     </div>
-
+    <!-- preview end -->
 
     <div id="vue">
         <div class="container">
