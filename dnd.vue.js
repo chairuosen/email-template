@@ -18,7 +18,15 @@ Vue_dnd.install = function(Vue, options) {
                 event.target.classList.remove(self.data.dragged);
                 return false;
             };
-            this.el.setAttribute('draggable', true);
+            this.mouseover = function(e){
+                if(e.target==this){
+                    this.setAttribute('draggable', true);
+                }else{
+                    this.setAttribute('draggable', false);
+                }
+            }
+            
+            _.on(this.el,'mouseover', this.mouseover);
             _.on(this.el, 'dragstart', this.dragstart);
             _.on(this.el, 'dragend', this.dragend);
         },
@@ -26,6 +34,7 @@ Vue_dnd.install = function(Vue, options) {
             this.el.setAttribute('draggable', false);
             _.off(this.el, 'dragstart', this.dragstart);
             _.off(this.el, 'dragend', this.dragend);
+            _.off(this.el, 'mouseover', this.mouseover);
         },
         update: function(value, old) {
             this.data = value;
