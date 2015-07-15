@@ -113,7 +113,7 @@
         </div>
     </div>
     <!-- panel end -->
-    
+
     <!-- preview start -->
     <div style="display:none;" id="display_module">
         <div class="module" name="title">
@@ -140,7 +140,8 @@
                 'text-indent:2em;':true,
                 'font-size:{{v}}px;':item.size,
                 'line-height:1.6em;':true,
-                'color:{{v}};':item.color
+                'color:{{v}};':item.color,
+                'margin:0;':true
             })" v-html="passage(item)"></p>
         </div>
         <div class="module" name="block">
