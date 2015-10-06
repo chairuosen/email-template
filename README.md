@@ -1,5 +1,7 @@
 # Email Template
 to make email HTML in front end.
+
+demo:[http://demo.ruosen.io/email_template/](http://demo.ruosen.io/email_template/)
 <!-- 
 
 ## Usage
