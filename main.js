@@ -32,7 +32,7 @@ $(function(){
         return _;
     }
     function buildTemplate(type,mainHtml){
-        var template = templateArr[type];
+        var template = _templateArr[type];
         return template.replace(/{{main}}/,mainHtml);
     }
     function onListChange(){
@@ -42,7 +42,7 @@ $(function(){
         }
         timeout = setTimeout(function(){
             db.set(vm.$data.list,1);
-            vm.$data.html = buildTemplate(vm.$data.templateId,getMainHtml());
+            vm.$data.html = buildTemplate(vm.$data.templateCurrent,getMainHtml());
         },10);
     }
     $('#panel_module>.module').each(function(){
@@ -52,7 +52,8 @@ $(function(){
         regModule( $(this), 'display' );
     });
 
-    var templateArr = getTemplate();
+    var _templateArr = getTemplate();
+    var templateNameArr = $('#template [name]').map(function(){return $(this).attr('name')}).get();
     var timeout;
     var vm = new Vue({
         el:'#vue',
@@ -60,7 +61,8 @@ $(function(){
             list:db.get(1)||[],
             html:"",
             tab:0,
-            templateId:1,
+            template:templateNameArr,
+            templateCurrent:templateNameArr[0],
             fontsize:[12,14,16,18,20,22,24,26,30,34,38,42]
         },
         methods:{
@@ -122,7 +124,7 @@ $(function(){
                 return item.value.replace(/{a}/g,str).replace(/\n/g,"<br/>");
             },
             chooseTemplate:function(i){
-                vm.$data.templateId = i;
+                vm.$data.templateCurrent = i;
                 onListChange();
             }
         }

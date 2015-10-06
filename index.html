@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>宇宙超级无敌牛逼邮件模板</title>
+<title>邮件模板</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <script src="./vue.min.js"></script>
@@ -190,7 +190,7 @@
                     <div class="margin">
                         应用模板：
                         <ul class="tabs small">
-                            <li v-repeat="3" v-on="click:chooseTemplate($index+1)" v-class="active:templateId==($index+1)">模板{{$index+1}}</li>
+                            <li v-repeat="template" v-on="click:chooseTemplate($value)" v-class="active:templateCurrent==($value)">模板{{$value}}</li>
                         </ul>
                     </div>
                     <div id="panel_save" class="panel-save margin">
@@ -251,7 +251,7 @@
 
 
     <div id="template" style="display:none;">
-        <div name="3">
+        <div name="blank">
             <table border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="margin:0 auto;">
                 <tbody>
                     <tr>
@@ -262,76 +262,7 @@
                 </tbody>
             </table>
         </div>
-        <div name="2">
-            <table style="background:#e6e6e6;color:#1d1d1e;" border="0" cellpadding="0" cellspacing="0" width="100%" style="background:#e6e6e6;">
-                <tbody>
-                <tr>
-                    <td>
-                        <table style="margin:0 auto;width:640px;height:75px;background:#0066cc;color:#fff;" align="center">
-                            <tbody>
-                            <tr>
-                                <td width="20">
-                                </td>
-                                <td>
-                                    <img src="http://img.zhaopin.weibo.com/web/161/img/logo_n.png" width="80" height="43" style="margin-left:10px;" alt=""/>
-                                </td>
-                                <td>
-                                    <div style="font-family:'微软雅黑';font-size:16px;text-align:right;color:#fff;line-height:1.4em;">
-                                        精准招聘专家<br/>
-                                        <a style="font-size:12px;color:#fff;text-decoration:none;" href="http://zhaopin.weibo.com?src=edm_mail">zhaopin.weibo.com</a>
-                                    </div>
-                                </td>
-                                <td width="30">
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <table style="margin:0 auto;width:640px;background:#fff;color:#333;" border="0" cellpadding="0" cellspacing="0" align="center">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <table style="width:563px;margin:0 auto;" align="center">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div style="height:20px;"></div>
-                                                {{main}}
-                                                <div style="height:20px;"></div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    
-                                    <div style="border-top:1px solid #ddd;">
-                                        <table style="width:563px;margin:0 auto;" align="center">
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div style="line-height:40px;color:#aaa;font-size:12px;">
-                                                        注：此邮件为系统邮件，请勿直接回复。
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-
-                        &nbsp;
-                        <table style="height:10px"></table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div name="1">
+        <div name="light_gray">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="">
                 <tbody>
                     <tr>
@@ -348,24 +279,9 @@
                                                         <td>
                                                             <div style="height:10px;"></div>
                                                         </td>
-                                                        <td rowspan="3">
-                                                            <div style="color:#333;">
-                                                                <span style="font-size:16px;">
-                                                                    微招聘PRO - 只做高薪
-                                                                </span>
-                                                                <br>
-                                                                <a style="font-size:12px;text-decoration:none;color:#333;" href="http://app.weizhaopin.com">
-                                                                    http://app.weizhaopin.com
-                                                                </a>
-                                                            </div>
-                                                        </td>
+                                                        
                                                     </tr>
                                                     <tr>
-                                                        <td width="190">
-                                                            <div style="width:172px;border-right:1px solid #333;">
-                                                                <img src="http://ww2.sinaimg.cn/large/3fab340fjw1etnbbjv9owj2048013jr8.jpg" width="152" height="39" alt="">
-                                                            </div>
-                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -416,7 +332,7 @@
                                                                 <tr>
                                                                     <td colspan="2">
                                                                         <div style="font-size:11px;color:#333;">
-                                                                            本邮件由微招聘PRO系统自动发送，<span style="color:#f66;">请勿直接回复</span>
+                                                                            本邮件由系统自动发送，<span style="color:#f66;">请勿直接回复</span>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
