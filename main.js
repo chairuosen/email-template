@@ -19,7 +19,7 @@ $(function(){
         Vue.partial((type||"")+"-"+name,html);
     }
     function getJsonModule(type){
-        return $.extend(true,{},JSON_MODULE[type]);
+        return $.extend(true,{},jsonModuleObj[type]);
     }
     function getMainHtml(){
         return $('._display').html().replace(/\ {4}/g,"").replace(/\n{1,5}/g,"\n")
@@ -51,7 +51,10 @@ $(function(){
     $('#display_module>.module').each(function(){
         regModule( $(this), 'display' );
     });
-
+    var jsonModuleObj = {};
+    JSON_MODULE.forEach(function(m){
+        jsonModuleObj[m.type] = m;
+    });
     var templateHtmlArr = getTemplate();
     var templateNameArr = $('#template [name]').map(function(){return $(this).attr('name')}).get();
     var timeout;
@@ -61,6 +64,7 @@ $(function(){
             list:db.get(1)||[],
             html:"",
             tab:0,
+            JSON_MODULE:JSON_MODULE,
             template:templateNameArr,
             templateCurrent:templateNameArr[0],
             fontsize:[12,14,16,18,20,22,24,26,30,34,38,42]
@@ -83,7 +87,7 @@ $(function(){
                 i&&(vm.$data.list = db.get(i)||[])
             },
             add:function(type){
-                JSON_MODULE[type] && vm.$data.list.push(getJsonModule(type));
+                jsonModuleObj[type] && vm.$data.list.push(getJsonModule(type));
             },
             del:function(i){
                 vm.$data.list.splice(i,1);

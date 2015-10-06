@@ -12,22 +12,24 @@
 <script src="./main.js"></script>
 <script>
     var TEXT_COLOR = "#333333";
-    var JSON_MODULE = {
-        title:{
+    var JSON_MODULE = [
+        {
+            name:"标题",
             type:'title',
             size:20,
             center:false,
             value:'新增标题',
             color:TEXT_COLOR
-
         },
-        image:{
+        {
+            name:"图片",
             type:'image',
             link:'',
             center:false,
             src:'http://ww4.sinaimg.cn/large/3fab340fjw1eu2d76m730j202p02oq2p.jpg'
         },
-        passage:{
+        {
+            name:"段落",
             type:"passage",
             value:'新增段落',
             size:14,
@@ -37,11 +39,13 @@
             linkcolor:TEXT_COLOR,
             indent:false
         },
-        block:{
+        {
+            name:"空行",
             type:"block",
             size:10
         },
-        button:{
+        {
+            name:"按钮",
             type:'button',
             text:'按钮',
             link:'',
@@ -50,8 +54,7 @@
             color:'#ffffff',
             padding:12
         }
-
-    }
+    ];
 </script>
 <link href="./style.css" rel="stylesheet">
 </head>
@@ -179,11 +182,7 @@
                     <div id="panel_add" class="panel-add margin">
                         增加一个：
                         <ul class="tabs small">
-                            <li v-on="click:add('title')">标题</li>
-                            <li v-on="click:add('image')">图片</li>
-                            <li v-on="click:add('passage')">段落</li>
-                            <li v-on="click:add('block')">空行</li>
-                            <li v-on="click:add('button')">按钮</li>
+                            <li v-repeat="JSON_MODULE" v-on="click:add($data.type)">{{$data.name}}</li>
                         </ul>
                         
                     </div>
