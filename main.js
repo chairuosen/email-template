@@ -32,7 +32,7 @@ $(function(){
         return _;
     }
     function buildTemplate(type,mainHtml){
-        var template = _templateArr[type];
+        var template = templateHtmlArr[type];
         return template.replace(/{{main}}/,mainHtml);
     }
     function onListChange(){
@@ -52,7 +52,7 @@ $(function(){
         regModule( $(this), 'display' );
     });
 
-    var _templateArr = getTemplate();
+    var templateHtmlArr = getTemplate();
     var templateNameArr = $('#template [name]').map(function(){return $(this).attr('name')}).get();
     var timeout;
     var vm = new Vue({
