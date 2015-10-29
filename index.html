@@ -6,7 +6,7 @@
 <title>邮件模板</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<script src="./vue.min.js"></script>
+<script src="./vue.js"></script>
 <script src="./dnd.vue.js"></script>
 <script src="./zepto.min.js"></script>
 <script src="./main.js"></script>
@@ -66,7 +66,7 @@
             标题：
             <input type="text" v-model="item.value">
             <select v-model="item.size" name="" id="">
-                <option v-repeat="s:fontsize" value="{{s}}">{{s}}px</option>
+                <option v-for="s in fontsize" value="{{s}}">{{s}}px</option>
             </select>
             <input type="checkbox" v-model="item.center" id="radio_{{$index}}">
             <label for="radio_{{$index}}">居中</label>
@@ -83,7 +83,7 @@
             段落：
             <textarea name="" id="" cols="30" rows="10" style="  width: 100%;" v-model="item.value"></textarea>
             字号：<select v-model="item.size" name="" id="">
-                <option v-repeat="s:fontsize" value="{{s}}">{{s}}px</option>
+                <option v-for="s in fontsize" value="{{s}}">{{s}}px</option>
             </select>
             正文颜色：
             <input type="color" v-model="item.color">
@@ -102,7 +102,7 @@
         <div class="module" name="block">
             空行：
             <select v-model="item.size" name="" id="">
-                <option v-repeat="s:[5,10,15,20,30,100]" value="{{s}}">{{s}}px</option>
+                <option v-for="s in [5,10,15,20,30,100]" value="{{s}}">{{s}}px</option>
             </select>
         </div>
         <div class="module" name="button">
@@ -111,12 +111,12 @@
             链接：<input type="text" v-model="item.link">
             <br>
             字号：<select v-model="item.size">
-                <option v-repeat="s:fontsize" value="{{s}}">{{s}}px</option>
+                <option v-for="s in fontsize" value="{{s}}">{{s}}px</option>
             </select>
             颜色：<input type="color" v-model="item.color">
             背景：<input type="color" v-model="item.background">
             边距：<select v-model="item.padding" >
-                <option v-repeat="s:[12,14,16,18,20,24,28]" value="{{s}}">{{s}}px</option>
+                <option v-for="s in[12,14,16,18,20,24,28]" value="{{s}}">{{s}}px</option>
             </select>
         </div>
     </div>
@@ -182,38 +182,38 @@
                     <div id="panel_add" class="panel-add margin">
                         增加一个：
                         <ul class="tabs small">
-                            <li v-repeat="JSON_MODULE" v-on="click:add($data.type)">{{$data.name}}</li>
+                            <li v-for="module in JSON_MODULE" @click="add(module.type)">{{module.name}}</li>
                         </ul>
                         
                     </div>
                     <div class="margin">
                         应用模板：
                         <ul class="tabs small">
-                            <li v-repeat="template" v-on="click:chooseTemplate($value)" v-class="active:templateCurrent==($value)">模板{{$value}}</li>
+                            <li v-for="name in template" @click="chooseTemplate(name)" :class="{active:templateCurrent==(name)}">模板{{name}}</li>
                         </ul>
                     </div>
                     <div id="panel_save" class="panel-save margin">
                         保存到：<select v-model="save_position">
-                            <option v-repeat="o:[1,2,3,4,5]" value="{{o}}">{{o}}</option>
+                            <option v-for="o in [1,2,3,4,5]" value="{{o}}">{{o}}</option>
                         </select>
-                        <button v-on="click:save(save_position);">确定</button> 
+                        <button @click="save(save_position||1);">确定</button> 
                         读取：<select v-model="restore_position">
-                            <option v-repeat="o:[1,2,3,4,5]" value="{{o}}">{{o}}</option>
+                            <option v-for="o in [1,2,3,4,5]" value="{{o}}">{{o}}</option>
                         </select>
-                        <button v-on="click:restore(restore_position);">确定</button>
+                        <button @click="restore(restore_position);">确定</button>
                         <br>
-                        <button v-on="click:clearAll()">当前全清</button>
+                        <button @click="clearAll()">当前全清</button>
                     </div>
 
                     <ul class="common-list">
                         <li 
-                        v-repeat="item:list"
-                        v-draggable="x: {index: $index, dragged: 'dragged'}" 
-                        v-dropzone="x: sort(list, $index, $droptag, $dropdata)"
+                        v-for="item in list"
+                        v-draggable:x="{index: $index, dragged: 'dragged'}" 
+                        v-dropzone:x="sort(list, $index, $droptag, $dropdata)"
                         style="padding-left:10px;" >
                             <partial name="{{'panel-'+item.type}}"></partial>
                             <div class="fr">
-                            <button v-on="click:del($index)">删除</button>
+                            <button @click="del($index)">删除</button>
                                 
                             </div>
                         </li>
@@ -221,18 +221,18 @@
                 </div>
                 <div class="fr right-block">
                     <ul class="tabs">
-                        <li v-repeat="3" v-class="active:tab==$index" v-on="click:tab=$index">{{["预览","数据","代码"][$index]}}</li>
+                        <li v-for="i in 3" :class="{active:tab==i}" @click="tab=i">{{["预览","数据","代码"][i]}}</li>
                     </ul>
                     <div style="border:2px dashed #999;">
-                        <div id="display" v-show="tab==0" v-html="html"></div>
+                        <div id="display" v-show="tab==0">{{{html}}}</div>
 
                         <div id="json"  v-show="tab==1">
                             JSON:
-                            <pre v-html="json(list)"></pre>
+                            <pre>{{{json(list)}}}</pre>
                         </div>
                         <div id="html"  v-show="tab==2">
                             <div style="background:#f9f9f9;padding:10px;">
-                                <pre v-text="html"></pre>
+                                <pre>{{html}}</pre>
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
 
                 
                 <div class="_display" style="display:none;">
-                    <div v-repeat="item:list">
+                    <div v-for="item in list">
                         <partial name="{{'display-'+item.type}}"></partial>
                     </div>
                 </div>
