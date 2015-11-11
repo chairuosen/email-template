@@ -1,5 +1,6 @@
 $(function(){
     Vue.use(Vue_dnd);
+    Vue.config.debug = true;
     var db = {
         set:function(a,n){
             var data = this.get()||{};
@@ -67,7 +68,8 @@ $(function(){
             JSON_MODULE:JSON_MODULE,
             template:templateNameArr,
             templateCurrent:templateNameArr[0],
-            fontsize:[12,14,16,18,20,22,24,26,30,34,38,42]
+            fontsize:[12,14,16,18,20,22,24,26,30,34,38,42],
+            padding:[12,14,16,18,20,24,28]
         },
         methods:{
             sort: function(list, id, tag, data) {
@@ -111,7 +113,7 @@ $(function(){
                         case 'number':
                         case 'string':
                             if(v){
-                                _ += k.replace(/{{v}}/g,v);
+                                _ += k.replace(/\$\$v\$\$/g,v);
                             }
                             break;
                         default:
