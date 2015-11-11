@@ -6,7 +6,7 @@
 <title>邮件模板</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<script src="./vue.js"></script>
+<script src="./vue.107.js"></script>
 <script src="./dnd.vue.js"></script>
 <script src="./zepto.min.js"></script>
 <script src="./main.js"></script>
@@ -68,16 +68,16 @@
             <select v-model="item.size" name="" id="">
                 <option v-for="s in fontsize" value="{{s}}">{{s}}px</option>
             </select>
-            <input type="checkbox" v-model="item.center" id="radio_{{$index}}">
-            <label for="radio_{{$index}}">居中</label>
+            <input type="checkbox" v-model="item.center" :id="'radio_' +$index">
+            <label :for="'radio_' +$index">居中</label>
             <input type="color" v-model="item.color">
         </div>
         <div class="module" name="image">
             图片：
             src: <input type="text" v-model="item.src">
             link: <input type="text" v-model="item.link">
-            <input type="checkbox" v-model="item.center" id="radio_{{$index}}">
-            <label for="radio_{{$index}}">居中</label>
+            <input type="checkbox" v-model="item.center" :id="'radio_' +$index">
+            <label :for="'radio_' +$index">居中</label>
         </div>
         <div class="module" name="passage">
             段落：
@@ -116,7 +116,7 @@
             颜色：<input type="color" v-model="item.color">
             背景：<input type="color" v-model="item.background">
             边距：<select v-model="item.padding" >
-                <option v-for="s in[12,14,16,18,20,24,28]" value="{{s}}">{{s}}px</option>
+                <option v-for="s in padding" value="{{s}}">{{s}}px</option>
             </select>
         </div>
     </div>
@@ -125,48 +125,48 @@
     <!-- preview start -->
     <div style="display:none;" id="display_module">
         <div class="module" name="title">
-            <div v-attr="style:getStyle({
-                'font-size:{{v}}px;':item.size,
+            <div :style="getStyle({
+                'font-size:$$v$$px;':item.size,
                 'text-align:center;':item.center,
                 'line-height:1.6em;':true,
-                'color:{{v}};':item.color
+                'color:$$v$$;':item.color
             })">{{item.value}}</div>
         </div>
         <div class="module" name="image">
-            <div v-attr="style:getStyle({
+            <div :style="getStyle({
                 'text-align:center;':item.center
             })">
-                <img v-if="!item.link" v-attr="src:item.src" style="max-width:100%;vertical-align: top;" alt="">
+                <img v-if="!item.link" :src="item.src" style="max-width:100%;vertical-align: top;" alt="">
                 <a href="{{item.link}}" v-if="item.link" target="_blank">
-                    <img v-attr="src:item.src" style="vertical-align: top;max-width:100%;" alt="">
+                    <img :src="item.src" style="vertical-align: top;max-width:100%;" alt="">
                 </a>
             </div>
             
         </div>
         <div class="module" name="passage">
-            <p v-attr="style:getStyle({
+            <p :style="getStyle({
                 'text-indent:2em;':item.indent,
-                'font-size:{{v}}px;':item.size,
+                'font-size:$$v$$px;':item.size,
                 'line-height:1.6em;':true,
-                'color:{{v}};':item.color,
+                'color:$$v$$;':item.color,
                 'margin:0;':true
             })" v-html="passage(item)"></p>
         </div>
         <div class="module" name="block">
-            <div v-attr="style:getStyle({
-                'height:{{v}}px;':item.size
+            <div :style="getStyle({
+                'height:$$v$$px;':item.size
             })"></div>
         </div>
         <div class="module" name="button">
             <div style="height:20px;"></div>
             <div style="text-align:center;">
-                <a href="{{item.link}}" target="_blank" v-attr="style:getStyle({
-                'background:{{v}};':item.background,
-                'font-size:{{v}}px;':item.size,
-                'line-height:{{v}}px;':item.height,
+                <a href="{{item.link}}" target="_blank" :style="getStyle({
+                'background:$$v$$;':item.background,
+                'font-size:$$v$$px;':item.size,
+                'line-height:$$v$$px;':item.height,
                 'text-decoration: none;':true,
-                'padding:{{v}}px;':item.padding,
-                'color:{{v}};':item.color
+                'padding:$$v$$px;':item.padding,
+                'color:$$v$$;':item.color
             })">{{item.text}}</a>
             </div>
             <div style="height:20px;"></div>
@@ -211,7 +211,7 @@
                         v-draggable:x="{index: $index, dragged: 'dragged'}" 
                         v-dropzone:x="sort(list, $index, $droptag, $dropdata)"
                         style="padding-left:10px;" >
-                            <partial name="{{'panel-'+item.type}}"></partial>
+                            <partial :name="'panel-'+item.type"></partial>
                             <div class="fr">
                             <button @click="del($index)">删除</button>
                                 
@@ -241,7 +241,7 @@
                 
                 <div class="_display" style="display:none;">
                     <div v-for="item in list">
-                        <partial name="{{'display-'+item.type}}"></partial>
+                        <partial :name="'display-'+item.type"></partial>
                     </div>
                 </div>
             </div>
