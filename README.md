@@ -1,8 +1,7 @@
 # Email Template
-to make email HTML in front end.
+Make email HTML in front end.
 
 demo:[http://demo.ruosen.io/email_template/](http://demo.ruosen.io/email_template/)
-<!-- 
 
 ## Usage
 
@@ -19,8 +18,43 @@ the `{{main}}` is the body mark.
 
 ```
 
-### add module
+### Add module
 
-1. add a object as module's data
+1. Module's data
 
-add an object in `JSON_MODULE` where in index.html -->
+Add an object in array `JSON_MODULE` at the top of index.html.
+
+```
+{
+    name:"custom_name", // required , display name for user
+    type:'custom_type', // required , unique name for code
+    custom_key,
+    ...
+},
+```
+
+2. Module's panel
+
+Add a piece of html in `#panel_module` with the attribute `name` which value is the type that defined in previous step.
+
+```
+<div class="module" name="custom_type">
+    custom_name:
+    custom_key：<input type="text" v-model="item.custom_key">
+</div>
+```
+
+3. Module's display
+
+Add a piece of html in `#display_module` with the attribute `name` you know.
+
+```
+<div class="module" name="custom_type">
+   {{custom_key}}
+</div>
+```
+
+
+
+
+
