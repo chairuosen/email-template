@@ -5,7 +5,7 @@ demo:[http://demo.ruosen.io/email_template/](http://demo.ruosen.io/email_templat
 
 ## Usage
 
-### add new template
+### Add new template
 edit index.html
 the `{{main}}` is the body mark.
 ```
