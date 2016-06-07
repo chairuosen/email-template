@@ -6,8 +6,11 @@ demo:[http://demo.ruosen.io/email_template/](http://demo.ruosen.io/email_templat
 ## Usage
 
 ### Add new template
+
 edit index.html
+
 the `{{main}}` is the body mark.
+
 ```
 <div id="template" style="display:none;">
     <div name="template_name_whatever_you_want">
