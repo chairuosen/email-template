@@ -1,0 +1,26 @@
+{
+  "name": "email_template",
+  "version": "1.0.0",
+  "description": "to make email HTML in front end.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && webpack && cp src/index.html dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://gitlab@git.ruosen.io:50207/chai/email-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "jquery": "^2.2.4",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "vue": "^1.0.24",
+    "vue-dnd": "^0.1.1",
+    "webpack": "^1.13.1"
+  }
+}

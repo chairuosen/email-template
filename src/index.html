@@ -1,62 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>邮件模板</title>
-<meta name="description" content="">
-<meta name="keywords" content="">
-<script src="./vue.107.js"></script>
-<script src="./dnd.vue.js"></script>
-<script src="./zepto.min.js"></script>
-<script src="./main.js"></script>
-<script>
-    var TEXT_COLOR = "#333333";
-    var JSON_MODULE = [
-        {
-            name:"标题",
-            type:'title',
-            size:20,
-            center:false,
-            value:'新增标题',
-            color:TEXT_COLOR
-        },
-        {
-            name:"图片",
-            type:'image',
-            link:'',
-            center:false,
-            src:'http://ww4.sinaimg.cn/large/3fab340fjw1eu2d76m730j202p02oq2p.jpg'
-        },
-        {
-            name:"段落",
-            type:"passage",
-            value:'新增段落',
-            size:14,
-            color:TEXT_COLOR,
-            linktext:'',
-            linkhref:'',
-            linkcolor:TEXT_COLOR,
-            indent:false
-        },
-        {
-            name:"空行",
-            type:"block",
-            size:10
-        },
-        {
-            name:"按钮",
-            type:'button',
-            text:'按钮',
-            link:'',
-            size:16,
-            background:TEXT_COLOR,
-            color:'#ffffff',
-            padding:12
-        }
-    ];
-</script>
-<link href="./style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>邮件模板</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script>
+        var TEXT_COLOR = "#333333";
+        var JSON_MODULE = [
+            {
+                name:"标题",
+                type:'title',
+                size:20,
+                center:false,
+                value:'新增标题',
+                color:TEXT_COLOR
+            },
+            {
+                name:"图片",
+                type:'image',
+                link:'',
+                center:false,
+                src:'http://ww4.sinaimg.cn/large/3fab340fjw1eu2d76m730j202p02oq2p.jpg'
+            },
+            {
+                name:"段落",
+                type:"passage",
+                value:'新增段落',
+                size:14,
+                color:TEXT_COLOR,
+                linktext:'',
+                linkhref:'',
+                linkcolor:TEXT_COLOR,
+                indent:false
+            },
+            {
+                name:"空行",
+                type:"block",
+                size:10
+            },
+            {
+                name:"按钮",
+                type:'button',
+                text:'按钮',
+                link:'',
+                size:16,
+                background:TEXT_COLOR,
+                color:'#ffffff',
+                padding:12
+            }
+        ];
+    </script>
 </head>
 <body>
 
@@ -363,5 +358,6 @@
             </table>
         </div>
     </div>
+    <script src="main.js"></script>
 </body>
 </html>
